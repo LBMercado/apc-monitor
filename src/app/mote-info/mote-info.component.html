@@ -1,0 +1,21 @@
+
+<div class="container" *ngFor="let mote of moteInfos">
+  <h1 class="header"> {{ mote.name }} </h1> <br><br>
+  <label class="lbl info"> Uptime </label>
+  <label class="lbl output" > {{ mote.uptime }} </label> <br> <br>
+  <label class="lbl info"> Definite Route </label>
+  <label class="lbl output" > {{ mote.definiteRoute }} </label> <br> <br>
+  <label class="lbl info"> RSSI </label>
+  <label class="lbl output" > {{ mote.rssi }} </label> <br> <br>
+  <label class="lbl info"> Preferred Address </label>
+  <label class="lbl output" > {{ mote.prefAddress }} </label> <br> <br>
+  <label class="lbl info"> On-Chip Temperature </label>
+  <label class="lbl output" > {{ mote.onChipTemp }} </label> <br> <br>
+  <label class="lbl info"> VDD3 (mV) </label>
+  <label class="lbl output" > {{ mote.vdd3 }} </label> <br> <br>
+  <label class="lbl info"> Calibration </label> <br> <br>
+  <div class="inner-container" *ngFor="let calib of mote.calibration">
+    <label class="lbl inner-info"> {{ calib.calibrationName }} </label>
+    <label class="lbl output">  {{ calib.calibrationValue }} </label> <br> <br>
+  </div>
+</div>
