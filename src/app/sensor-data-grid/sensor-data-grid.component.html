@@ -1,1 +1,13 @@
-<p>sensor-data-grid works!</p>
+<div class="container">
+  <app-sensor-data-chart [sensorData]='moteDataColl.temperature'></app-sensor-data-chart>
+  <app-sensor-data-chart [sensorData]='moteDataColl.humidity'></app-sensor-data-chart>
+  <app-sensor-data-chart [sensorData]='moteDataColl.co'></app-sensor-data-chart>
+  <app-sensor-data-chart [sensorData]='moteDataColl.no2'></app-sensor-data-chart>
+  <app-sensor-data-chart [sensorData]='moteDataColl.o3'></app-sensor-data-chart>
+  <app-sensor-data-chart [sensorData]='moteDataColl.pm25'></app-sensor-data-chart>
+  <app-sensor-data-chart [sensorData]='moteDataColl.windSpeed'></app-sensor-data-chart>
+  <div class="chart-container">
+    <label class="lbl info"> Current Wind Direction </label>
+    <label class="lbl output"> {{ moteDataColl.windDirection[moteDataColl.windDirection.length - 1].value }} </label>
+  </div>
+</div>

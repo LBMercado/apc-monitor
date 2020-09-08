@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { SensorDataComponent } from './sensor-data.component';
+import { DownloadMoteDataComponent } from './download-mote-data.component';
 
-describe('SensorDataComponent', () => {
-  let component: SensorDataComponent;
-  let fixture: ComponentFixture<SensorDataComponent>;
+describe('DownloadMoteDataComponent', () => {
+  let component: DownloadMoteDataComponent;
+  let fixture: ComponentFixture<DownloadMoteDataComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ SensorDataComponent ]
+      declarations: [ DownloadMoteDataComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(SensorDataComponent);
+    fixture = TestBed.createComponent(DownloadMoteDataComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

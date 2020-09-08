@@ -1,3 +1,5 @@
+import { Calibration } from './calibration';
+
 export class MoteInfo {
   name: string;
   uptime: number;
@@ -6,16 +8,11 @@ export class MoteInfo {
   prefAddress: string;
   onChipTemp: number;
   vdd3: number;
-  calibration: ICalibration[];
+  calibration: Calibration[];
 
   constructor(){
     this.name = this.definiteRoute = this.prefAddress = '';
     this.uptime = this.rssi = this.onChipTemp = this.vdd3 = 0;
     this.calibration = []
   }
-}
-
-interface ICalibration {
-  calibrationName: string;
-  calibrationValue: number;
 }

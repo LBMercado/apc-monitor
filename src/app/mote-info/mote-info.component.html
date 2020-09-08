@@ -15,7 +15,7 @@
   <label class="lbl output" > {{ mote.vdd3 }} </label> <br> <br>
   <label class="lbl info"> Calibration </label> <br> <br>
   <div class="inner-container" *ngFor="let calib of mote.calibration">
-    <label class="lbl inner-info"> {{ calib.calibrationName }} </label>
-    <label class="lbl output">  {{ calib.calibrationValue }} </label> <br> <br>
+    <label class="lbl inner-info"> {{ calib.type }} </label>
+    <label class="lbl output">  {{ calib.value }} </label> <br> <br>
   </div>
 </div>

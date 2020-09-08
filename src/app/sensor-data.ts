@@ -1,9 +1,5 @@
-export class SensorData {
-  sensorType: string;
-  sensorValue: any;
-
-  constructor(){
-    this.sensorType = '';
-    this.sensorValue = null;
-  }
+export interface SensorData {
+  type: string;
+  value: any;
+  date?: Date;
 }

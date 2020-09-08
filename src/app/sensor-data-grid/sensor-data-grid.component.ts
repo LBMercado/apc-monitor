@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { MoteData } from '../mote-data';
 import { MoteDataService } from '../mote-data.service'
-import { SensorData } from '../sensor-data';
+import { MoteDataCollection } from '../mote-data-collection';
 
 @Component({
   selector: 'app-sensor-data-grid',
@@ -9,12 +10,41 @@ import { SensorData } from '../sensor-data';
 })
 export class SensorDataGridComponent implements OnInit {
 
-  private moteSensorData: SensorData[];
+  moteData: MoteData[];
+  moteDataColl: MoteDataCollection;
 
-  constructor(private _moteDataSvc: MoteDataService) { }
-
-  ngOnInit(): void {
-
+  constructor(private _moteDataSvc: MoteDataService) {
+    this.moteData = []
+    this.moteDataColl = new MoteDataCollection()
   }
 
+  ngOnInit(): void {
+    this._moteDataSvc.getSensorData(10)
+    .subscribe((res) => {
+
+      res.forEach( (val) => {
+        this.moteData.push(this.normalizeMoteData(val));
+      });
+
+      Object.keys(this.moteDataColl).forEach( (key) => {
+        this.moteDataColl[key] = this.moteData.map(val => {
+          return {
+            type: val[key].type,
+            value: val[key].value,
+            date: val.date
+          }
+        });
+      });
+    });
+  }
+
+  normalizeMoteData(rawMoteData: Object): MoteData {
+    let formattedMoteData = new MoteData();
+
+    Object.keys(formattedMoteData).forEach( (key) => {
+      formattedMoteData[key].value = rawMoteData[formattedMoteData[key].type];
+    });
+
+    return formattedMoteData;
+  }
 }
