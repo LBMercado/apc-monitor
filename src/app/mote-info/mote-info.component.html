@@ -1,21 +1,37 @@
 
-<div class="container" *ngFor="let mote of moteInfos">
-  <h1 class="header"> {{ mote.name }} </h1> <br><br>
-  <label class="lbl info"> Uptime </label>
-  <label class="lbl output" > {{ mote.uptime }} </label> <br> <br>
-  <label class="lbl info"> Definite Route </label>
-  <label class="lbl output" > {{ mote.definiteRoute }} </label> <br> <br>
-  <label class="lbl info"> RSSI </label>
-  <label class="lbl output" > {{ mote.rssi }} </label> <br> <br>
-  <label class="lbl info"> Preferred Address </label>
-  <label class="lbl output" > {{ mote.prefAddress }} </label> <br> <br>
-  <label class="lbl info"> On-Chip Temperature </label>
-  <label class="lbl output" > {{ mote.onChipTemp }} </label> <br> <br>
-  <label class="lbl info"> VDD3 (mV) </label>
-  <label class="lbl output" > {{ mote.vdd3 }} </label> <br> <br>
-  <label class="lbl info"> Calibration </label> <br> <br>
-  <div class="inner-container" *ngFor="let calib of mote.calibration">
-    <label class="lbl inner-info"> {{ calib.type }} </label>
-    <label class="lbl output">  {{ calib.value }} </label> <br> <br>
+<div class="container">
+  <div class="item-container" *ngFor='let mote of moteInfos'>
+    <h1 class="header"> {{ mote.name.value }} </h1>
+    <div class="inner-container">
+      <label class="lbl-info"> {{ mote.uptime.type }} </label>
+      <label class="lbl-output" > {{ mote.uptime.value }} </label> <br>
+    </div>
+    <div class="inner-container">
+      <label class="lbl-info"> {{ mote.definiteRoute.type }} </label>
+      <label class="lbl-output" > {{ mote.definiteRoute.value }} </label> <br>
+    </div>
+    <div class="inner-container">
+      <label class="lbl-info"> {{ mote.rssi.type }} </label>
+      <label class="lbl-output" > {{ mote.rssi.value }} </label> <br>
+    </div>
+    <div class="inner-container">
+      <label class="lbl-info"> {{ mote.prefAddress.type }} </label>
+      <label class="lbl-output" > {{ mote.prefAddress.value }} </label> <br>
+    </div>
+    <div class="inner-container">
+      <label class="lbl-info"> {{ mote.onChipTemp.type }} </label>
+      <label class="lbl-output" > {{ mote.onChipTemp.value }} </label> <br>
+    </div>
+    <div class="inner-container">
+      <label class="lbl-info"> {{ mote.vdd3.type }} </label>
+      <label class="lbl-output" > {{ mote.vdd3.value }} </label> <br>
+    </div>
+    <div class="inner-container">
+      <label class="lbl-list-info"> Calibration </label>
+      <div class="list-container" *ngFor="let calib of mote.calibration">
+        <label class="lbl-inner-info"> {{ calib.type }} </label>
+        <label class="lbl-inner-output">  {{ calib.value }} </label>
+      </div>
+    </div>
   </div>
 </div>

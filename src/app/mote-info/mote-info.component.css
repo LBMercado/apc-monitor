@@ -1,0 +1,63 @@
+.container {
+  display: flex;
+  width: fit-content;
+  border: 5px solid maroon;
+  padding: 15px;
+  margin: 20px;
+  align-self: center;
+}
+
+.item-container {
+  width: auto;
+  border: 5px solid maroon;
+  padding: 15px;
+  margin: 20px;
+  display: block;
+  justify-content: center;
+}
+
+.inner-container {
+  border: 3px solid maroon;
+  padding: 10px;
+  width: auto;
+  display: block;
+  justify-items: center;
+  align-content: center;
+}
+
+.list-container {
+  border: 2px solid maroon;
+  padding: 10px;
+  width: auto;
+  display: flex;
+  overflow: auto;
+}
+
+.lbl-info {
+  margin-right: 20px;
+  width: 50%;
+  float: left;
+}
+
+.lbl-list-info {
+  align-content: center;
+}
+
+.lbl-output {
+  margin-left: 20px;
+  float: left;
+}
+
+.lbl-inner-info {
+  margin-right: 20px;
+  margin-top: 10px;
+  margin-left: 10px;
+  float: left;
+  width: 50%;
+}
+
+.lbl-inner-output {
+  margin-left: 20px;
+  float: left;
+  width: 50%;
+}
