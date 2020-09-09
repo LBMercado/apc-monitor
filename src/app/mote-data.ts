@@ -17,9 +17,23 @@ export class MoteData {
     this.pm25 = { type: 'PM25 (ug/m3)', value: -1};
     this.co = { type: 'CO (PPM)', value: -1 };
     this.no2 = { type: 'NO2 (PPM)', value: -1 };
-    this.o3 = { type: 'O3 (PPM)', value: -1 };
+    this.o3 = { type: 'O3 (PPB)', value: -1 };
     this.windSpeed = { type: 'Wind Speed (m/s)', value: -1 };
     this.windDirection = { type: 'Wind Direction', value: '' };
     this.date = new Date();
+  }
+
+  /**
+   * constructMoteData
+   * construct mote data object from mote data-like objects based on types
+   */
+  public constructMoteData(rawMoteData: Object) {
+    Object.keys(this).forEach( (key) => {
+      if (key == 'date')
+        this[key] = new Date(rawMoteData[key]);
+      else
+        this[key].value = rawMoteData[this[key].type];
+
+    });
   }
 }

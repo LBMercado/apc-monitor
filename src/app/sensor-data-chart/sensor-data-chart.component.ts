@@ -28,7 +28,7 @@ export class SensorDataChartComponent implements OnInit, OnChanges {
   }
 
   ngOnInit(): void {
-    var dates = this.sensorData.map(res => res.date.toString());
+    var dates = this.sensorData.map(res => res.date.toUTCString());
     var sensorValues = this.sensorData.map(res => res.value);
 
     this.chartData = [
@@ -55,7 +55,7 @@ export class SensorDataChartComponent implements OnInit, OnChanges {
   }
 
   updateChart(){
-    var dates = this.sensorData.map(res => res.date.toString());
+    var dates = this.sensorData.map(res => res.date.toUTCString());
     var sensorValues = this.sensorData.map(res => res.value);
 
     this.chartData = [
