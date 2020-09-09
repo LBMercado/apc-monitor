@@ -1,4 +1,5 @@
 import { SensorData } from './sensor-data';
+import { MoteData } from './mote-data';
 
 export class MoteDataCollection {
   temperature: SensorData[];
@@ -19,5 +20,21 @@ export class MoteDataCollection {
     this.o3 = [];
     this.windSpeed = [];
     this.windDirection = [];
+  }
+
+  /**
+   * constructMoteDataCollection
+   * construct mote data collection from mote data array
+   */
+  public constructMoteDataCollection(moteData: MoteData[]) {
+    Object.keys(this).forEach( (key) => {
+      this[key] = moteData.map(val => {
+        return {
+          type: val[key].type,
+          value: val[key].value,
+          date: val.date
+        };
+      });
+    });
   }
 }

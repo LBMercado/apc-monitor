@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { MoteData } from '../mote-data';
 import { MoteDataService } from '../mote-data.service'
 import { MoteDataCollection } from '../mote-data-collection';
+import { interval } from 'rxjs'
 
 @Component({
   selector: 'app-sensor-data-grid',
@@ -19,32 +20,28 @@ export class SensorDataGridComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this._moteDataSvc.getSensorData(10)
-    .subscribe((res) => {
-
-      res.forEach( (val) => {
-        this.moteData.push(this.normalizeMoteData(val));
-      });
-
-      Object.keys(this.moteDataColl).forEach( (key) => {
-        this.moteDataColl[key] = this.moteData.map(val => {
-          return {
-            type: val[key].type,
-            value: val[key].value,
-            date: val.date
-          }
-        });
-      });
+    this.updateData();
+    interval(600000).subscribe(()=>{
+      this.updateData();
     });
   }
 
-  normalizeMoteData(rawMoteData: Object): MoteData {
-    let formattedMoteData = new MoteData();
+  private updateData(){
+    this._moteDataSvc.getSensorData(20)
+    .subscribe((res) => {
+      this.moteData = []
+      this.moteDataColl = new MoteDataCollection()
 
-    Object.keys(formattedMoteData).forEach( (key) => {
-      formattedMoteData[key].value = rawMoteData[formattedMoteData[key].type];
+      res.forEach( (val) => {
+        var newMoteData = new MoteData();
+        newMoteData.constructMoteData(val)
+        this.moteData.push(newMoteData);
+      });
+      // array is in wrong order for chart (must be ascending with reference to dates)
+      this.moteData.reverse()
+
+      this.moteDataColl = new MoteDataCollection();
+      this.moteDataColl.constructMoteDataCollection(this.moteData);
     });
-
-    return formattedMoteData;
   }
 }
