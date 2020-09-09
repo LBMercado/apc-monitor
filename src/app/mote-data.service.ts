@@ -24,7 +24,7 @@ export class MoteDataService {
   }
 
   getMoteInfo(){
-    return this.httpClient.get<Object>(`${this.api_url}/mote-info`);
+    return this.httpClient.get<Object[]>(`${this.api_url}/mote-info`);
   }
 
   getCsvSensorData(){
