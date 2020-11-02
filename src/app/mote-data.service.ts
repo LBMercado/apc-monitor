@@ -30,4 +30,10 @@ export class MoteDataService {
   getCsvSensorData(){
     return this.httpClient.get(`${this.api_url}/sensor-data-csv`, { responseType: 'blob' });
   }
+
+  getPredictionData(step: number){
+    if (step <= 0 || step > 12)
+      step = 1
+    return this.httpClient.get<Object[]>(`${this.api_url}/predict/${step}`);
+  }
 }

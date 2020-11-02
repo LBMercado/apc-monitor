@@ -2,7 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { MoteData } from '../mote-data';
 import { MoteDataService } from '../mote-data.service'
 import { MoteDataCollection } from '../mote-data-collection';
-import { interval } from 'rxjs'
+import { interval, Observable } from 'rxjs'
+import { environment as env } from '../../environments/environment'
+import { PredictionData } from '../prediction-data';
+import { PredictionDataCollection } from '../prediction-data-collection';
 
 @Component({
   selector: 'app-sensor-data-grid',
@@ -13,21 +16,31 @@ export class SensorDataGridComponent implements OnInit {
 
   moteData: MoteData[];
   moteDataColl: MoteDataCollection;
+  predictionData: PredictionData[];
+  predictionDataColl: PredictionDataCollection;
+  updateInterval: number;
+  sensorDataCount: number;
+  predictionCount: number;
 
   constructor(private _moteDataSvc: MoteDataService) {
-    this.moteData = []
-    this.moteDataColl = new MoteDataCollection()
+    this.moteData = [];
+    this.moteDataColl = new MoteDataCollection();
+    this.predictionData = [];
+    this.predictionDataColl = new PredictionDataCollection();
+    this.updateInterval = env.chart_refresh_rate;
+    this.sensorDataCount = env.graph_data_length;
+    this.predictionCount = env.prediction_count;
   }
 
   ngOnInit(): void {
     this.updateData();
-    interval(600000).subscribe(()=>{
+    interval(this.updateInterval).subscribe(()=>{
       this.updateData();
     });
   }
 
   private updateData(){
-    this._moteDataSvc.getSensorData(20)
+    this._moteDataSvc.getSensorData(this.sensorDataCount)
     .subscribe((res) => {
       this.moteData = []
       this.moteDataColl = new MoteDataCollection()
@@ -40,8 +53,21 @@ export class SensorDataGridComponent implements OnInit {
       // array is in wrong order for chart (must be ascending with reference to dates)
       this.moteData.reverse()
 
-      this.moteDataColl = new MoteDataCollection();
       this.moteDataColl.constructMoteDataCollection(this.moteData);
+    });
+
+    this._moteDataSvc.getPredictionData(this.predictionCount)
+    .subscribe( (res) => {
+      this.predictionData = [];
+      this.predictionDataColl = new PredictionDataCollection();
+
+      res.forEach( (obj) => {
+        var predsData = new PredictionData();
+        predsData.constructPredictionData(obj);
+        this.predictionData.push(predsData)
+      });
+
+      this.predictionDataColl.constructPredictionDataCollection(this.predictionData);
     });
   }
 }
