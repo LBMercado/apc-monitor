@@ -61,6 +61,16 @@ export class SensorDataGridComponent implements OnInit {
       this.predictionData = [];
       this.predictionDataColl = new PredictionDataCollection();
 
+      // push last value from past data into predictions to connect the two graphs
+      var lastMoteData = this.moteData[this.moteData.length - 1];
+      var firstPredData = new PredictionData();
+      firstPredData.co = lastMoteData.co;
+      firstPredData.no2 = lastMoteData.no2;
+      firstPredData.o3 = lastMoteData.o3;
+      firstPredData.pm25 = lastMoteData.pm25;
+      firstPredData.date = lastMoteData.date;
+      this.predictionData.push(firstPredData);
+
       res.forEach( (obj) => {
         var predsData = new PredictionData();
         predsData.constructPredictionData(obj);
