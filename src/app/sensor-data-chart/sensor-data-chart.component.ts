@@ -29,28 +29,13 @@ export class SensorDataChartComponent implements OnInit, OnChanges {
   }
 
   ngOnInit(): void {
-    var pastDates = this.pastSensorData.map(res => res.date.toUTCString());
-    var pastSensorValues = this.pastSensorData.map(res => res.value);
-    if (this.predictionData){
-      var predsSensorValues = this.predictionData.map(res => ({ x: res.date.toUTCString(), y: res.value}));
-      var predsDates = this.predictionData.map(res => res.date.toUTCString());
-
-      this.chartData = [
-        { data: pastSensorValues, label: this.pastSensorData[0].type },
-        { data: predsSensorValues, label: this.predictionData[0].type }
-      ];
-      this.chartLabels = pastDates.concat(predsDates);
-    } else {
-      this.chartData = [
-        { data: pastSensorValues, label: this.pastSensorData[0].type }
-      ];
-      this.chartLabels = pastDates;
-    }
+    this.updateChart();
 
     this.chartOpts = {
       responsive: true,
       scales: {
         xAxes: [{
+          type: "time",
           display: true
         }],
         yAxes: [{
@@ -67,7 +52,7 @@ export class SensorDataChartComponent implements OnInit, OnChanges {
 
   private updateChart(){
     var pastDates = this.pastSensorData.map(res => res.date.toUTCString());
-    var pastSensorValues = this.pastSensorData.map(res => res.value);
+    var pastSensorValues = this.pastSensorData.map(res => ({ x: res.date.toUTCString(), y: res.value}));
 
     if (this.predictionData){
       var predsSensorValues = this.predictionData.map(res => ({ x: res.date.toUTCString(), y: res.value}));
@@ -75,9 +60,11 @@ export class SensorDataChartComponent implements OnInit, OnChanges {
 
       this.chartData = [
         { data: pastSensorValues, label: this.pastSensorData[0].type },
-        { data: predsSensorValues, label: this.predictionData[0].type }
+        { data: predsSensorValues, label:  'Forecasted '+ this.predictionData[0].type }
       ];
-      this.chartLabels = pastDates.concat(predsDates);
+      // make sure not to duplicate the added date
+      this.chartLabels = pastDates.slice(0, -1).concat(predsDates);
+
     } else {
       this.chartData = [
         { data: pastSensorValues, label: this.pastSensorData[0].type }

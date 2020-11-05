@@ -74,7 +74,6 @@ export class SensorDataGridComponent implements OnInit {
             predsData.constructPredictionData(obj);
             this.predictionData.push(predsData);
           });
-
           this.predictionDataColl.constructPredictionDataCollection(
             this.predictionData
           );
