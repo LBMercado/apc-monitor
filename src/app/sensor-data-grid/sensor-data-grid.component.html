@@ -1,10 +1,10 @@
 <div class="container">
   <app-sensor-data-chart [pastSensorData]='moteDataColl.temperature'></app-sensor-data-chart>
   <app-sensor-data-chart [pastSensorData]='moteDataColl.humidity'></app-sensor-data-chart>
-  <app-sensor-data-chart [pastSensorData]='moteDataColl.co' [predictionData]='predictionDataColl.co'></app-sensor-data-chart>
-  <app-sensor-data-chart [pastSensorData]='moteDataColl.no2' [predictionData]='predictionDataColl.no2'></app-sensor-data-chart>
-  <app-sensor-data-chart [pastSensorData]='moteDataColl.o3' [predictionData]='predictionDataColl.o3'></app-sensor-data-chart>
-  <app-sensor-data-chart [pastSensorData]='moteDataColl.pm25' [predictionData]='predictionDataColl.pm25'></app-sensor-data-chart>
+  <app-sensor-data-chart *ngIf='predictionDataColl.co.length' [pastSensorData]='moteDataColl.co' [predictionData]='predictionDataColl.co'></app-sensor-data-chart>
+  <app-sensor-data-chart *ngIf='predictionDataColl.no2.length' [pastSensorData]='moteDataColl.no2' [predictionData]='predictionDataColl.no2'></app-sensor-data-chart>
+  <app-sensor-data-chart *ngIf='predictionDataColl.o3.length' [pastSensorData]='moteDataColl.o3' [predictionData]='predictionDataColl.o3'></app-sensor-data-chart>
+  <app-sensor-data-chart *ngIf='predictionDataColl.pm25.length' [pastSensorData]='moteDataColl.pm25' [predictionData]='predictionDataColl.pm25'></app-sensor-data-chart>
   <app-sensor-data-chart [pastSensorData]='moteDataColl.windSpeed'></app-sensor-data-chart>
   <div class="chart-container">
     <label class="lbl-info"> Current Wind Direction </label>

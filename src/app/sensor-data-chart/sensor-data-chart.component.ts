@@ -65,7 +65,7 @@ export class SensorDataChartComponent implements OnInit, OnChanges {
     this.chartType = 'line';
   }
 
-  updateChart(){
+  private updateChart(){
     var pastDates = this.pastSensorData.map(res => res.date.toUTCString());
     var pastSensorValues = this.pastSensorData.map(res => res.value);
 
