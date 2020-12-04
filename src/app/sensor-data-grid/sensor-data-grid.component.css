@@ -1,8 +1,17 @@
 .container {
   margin: auto;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
 }
 
 .chart-container {
+  height: 200px;
+  flex: 0 0 50%;
+  width: 50%;
+}
+
+.static-content-container {
   display: flex;
   border: 2px solid grey;
   padding: 10px;
